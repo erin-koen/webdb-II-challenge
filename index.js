@@ -1,12 +1,18 @@
-const express = require('express');
-const helmet = require('helmet');
+const express = require("express");
+const helmet = require("helmet");
+const knex = require("knex");
+
+const knexConfig = require("./knexfile.js");
+const ZooRouter = require('./ZooRouter.js')
+
+const db = knex(knexConfig.development);
 
 const server = express();
 
 server.use(express.json());
 server.use(helmet());
 
-// endpoints here
+server.use('/api/zoos', ZooRouter);
 
 const port = 3300;
 server.listen(port, function() {
